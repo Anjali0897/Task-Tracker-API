@@ -1,0 +1,23 @@
+# Internal DB service (the app connects to "taskdb")
+apiVersion: v1
+kind: Service
+metadata:
+  name: taskdb
+  namespace: taskapp
+spec:
+  type: ClusterIP
+  selector: {app: postgres}
+  ports:
+    - {name: pg, port: 5432, targetPort: 5432}
+---
+# App service. Switch to LoadBalancer to skip the Ingress while practicing.
+apiVersion: v1
+kind: Service
+metadata:
+  name: task-app
+  namespace: taskapp
+spec:
+  type: ClusterIP
+  selector: {app: task-app}
+  ports:
+    - {name: http, port: 80, targetPort: http}

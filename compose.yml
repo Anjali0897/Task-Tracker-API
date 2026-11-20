@@ -1,0 +1,27 @@
+# Local smoke test:  docker compose up --build   then   curl localhost:3000/tasks
+services:
+  db:
+    build: Docker-db
+    environment:
+      POSTGRES_DB: tasks
+      POSTGRES_USER: taskuser
+      POSTGRES_PASSWORD: localpass
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taskuser -d tasks"]
+      interval: 5s
+      retries: 12
+
+  app:
+    build:
+      context: .
+      dockerfile: Docker-app/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_NAME: tasks
+      DB_USER: taskuser
+      DB_PASSWORD: localpass
+    depends_on:
+      db:
+        condition: service_healthy

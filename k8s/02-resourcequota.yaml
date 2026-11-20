@@ -1,0 +1,13 @@
+# Caps what this namespace can consume
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: taskapp-quota
+  namespace: taskapp
+spec:
+  hard:
+    requests.cpu: "4"
+    requests.memory: 6Gi
+    limits.memory: 8Gi
+    persistentvolumeclaims: "2"
+    pods: "30"

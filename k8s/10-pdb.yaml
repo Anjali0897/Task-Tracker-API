@@ -1,0 +1,10 @@
+# Keeps at least 2 app pods up during node drains and upgrades
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: task-app
+  namespace: taskapp
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels: {app: task-app}
