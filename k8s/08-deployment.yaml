@@ -40,7 +40,7 @@ spec:
             capabilities: {drop: ["ALL"]}
       containers:
         - name: app
-          image: anjaligundavaram/taskapi:1       # Jenkins updates this tag
+          image: anjaligundavaram/python-trackapi:app       # Jenkins updates this tag
           ports:
             - {name: http, containerPort: 3000}
           envFrom:
