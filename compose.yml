@@ -1,7 +1,7 @@
 # Local smoke test:  docker compose up --build   then   curl localhost:3000/tasks
 services:
   db:
-    image: anjaligundavaram/python:db
+    image: anjaligundavaram/python-trackapi:db
     environment:
       POSTGRES_DB: tasks
       POSTGRES_USER: taskuser
@@ -12,7 +12,7 @@ services:
       retries: 12
 
   app:
-    image: anjaligundavaram/python:app
+    image: anjaligundavaram/python-trackapi:app
       context: .
       dockerfile: Docker-app/Dockerfile
     ports:
